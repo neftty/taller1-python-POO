@@ -41,10 +41,11 @@ class SimuladorInvernadero:
         print("\nApagando el sistema de control. ¡Hasta luego!")
 
 
-#--------------------CÓDIGO PRINCIPAL----------------------
+# CÓDIGO PRINCIPAL
 
-# 1. Creamos un objeto de la clase SimuladorInvernadero.
+# Creamos un objeto de la clase SimuladorInvernadero.
 simulador = SimuladorInvernadero()
 
-# 2. Llamamos al método que inicia la simulación.
+#Llamamos al método que inicia la simulación.
 simulador.iniciar_simulacion()
+
