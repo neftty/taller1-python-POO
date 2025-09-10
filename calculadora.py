@@ -1,93 +1,82 @@
 # ======================================================================
-# CLASE FizzBuzzJuego (Esta clase no necesita cambios)
+# CLASE Calculadora
+# Abstracción: Representa las operaciones matemáticas básicas.
+# Encapsulamiento: Contiene el método con la lógica para realizar
+# los cálculos.
 # ======================================================================
-class FizzBuzzJuego:
-    def obtener_resultado(self, numero):
+class Calculadora:
+    def realizar_operacion(self, num1, num2, operacion):
         """
-        Método que aplica las reglas de FizzBuzz a un número.
+        Método que realiza un cálculo basado en la operación solicitada.
+        Parámetros: num1, num2, operacion
+        Retorno: El resultado del cálculo o un mensaje de error.
         """
-        if numero % 15 == 0:
-            return "FizzBuzz"
-        elif numero % 3 == 0:
-            return "Fizz"
-        elif numero % 5 == 0:
-            return "Buzz"
+        if operacion == "suma":
+            return num1 + num2
+        elif operacion == "resta":
+            return num1 - num2
+        elif operacion == "multiplicacion":
+            return num1 * num2
+        elif operacion == "division":
+            # Manejo del caso especial de división por cero
+            if num2 == 0:
+                return "Error: No se puede dividir por cero"
+            return num1 / num2
         else:
-            return str(numero)
+            return "Error: Operación no válida"
 
 # ======================================================================
-# CLASE Aplicacion (Modificada para incluir el menú)
+# CLASE Aplicacion
+# Gestiona el flujo principal del programa y la interacción con el usuario.
 # ======================================================================
 class Aplicacion:
     def __init__(self):
         """
         Método constructor de la aplicación.
+        Crea un objeto de la clase Calculadora para usar su lógica.
         """
-        self.juego = FizzBuzzJuego()
-
-    def _resolver_ejercicio(self):
-        """
-        Método privado que contiene la lógica para ejecutar una
-        ronda del juego FizzBuzz.
-        """
-        print("\n--- Resolviendo FizzBuzz ---")
-        # Bucle para solicitar y validar la entrada del usuario.
-        while True:
-            try:
-                limite_str = input("Introduce hasta qué número quieres jugar (entre 1 y 100): ")
-                limite = int(limite_str)
-                
-                # Validamos que el número esté DENTRO del rango de 1 a 100.
-                if 1 <= limite <= 100:
-                    break  # Si el número es válido, rompemos el bucle.
-                else:
-                    print("Error: El número debe estar entre 1 y 100.")
-
-            except ValueError:
-                print("Error: Debes introducir un número entero válido.")
-
-        print(f"\n--- Resultado de FizzBuzz hasta {limite} ---\n")
-
-        # Bucle que recorre los números desde 1 hasta el límite.
-        for numero_actual in range(1, limite + 1):
-            resultado = self.juego.obtener_resultado(numero_actual)
-            print(resultado)
-        
-        print("\n--- ¡Ejercicio Terminado! ---")
-        input("Presiona Enter para volver al menú...")
+        self.calculadora = Calculadora()
 
     def iniciar(self):
         """
-        Método principal que muestra el menú y gestiona las opciones del usuario.
+        Método que contiene el bucle principal para que el usuario
+        pueda realizar múltiples cálculos.
         """
-        # Mensaje de bienvenida que explica el problema.
-        print("¡Bienvenido al Desafío FizzBuzz!")
-        print("El programa recorrerá los números desde 1 hasta el número que elijas.")
-        print("Imprimirá 'Fizz' para múltiplos de 3, 'Buzz' para múltiplos de 5,")
-        print("y 'FizzBuzz' para múltiplos de ambos.")
+        print("🧮 ¡Bienvenido a la Calculadora Simple! 🧮")
 
-        # Bucle principal del menú.
         while True:
-            print("\n--- MENÚ PRINCIPAL ---")
-            print("1. Resolver Ejercicio FizzBuzz")
-            print("2. Salir")
-            
-            opcion = input("Elige una opción: ")
+            try:
+                # 1. Pedir los datos al usuario
+                num1 = float(input("\nIntroduce el primer número: "))
+                num2 = float(input("Introduce el segundo número: "))
+                operacion = input("Elige la operación (suma, resta, multiplicacion, division): ").strip().lower()
 
-            if opcion == "1":
-                # La opción 1 llama al método para resolver el ejercicio.
-                # Al terminar, volverá automáticamente a este menú.
-                self._resolver_ejercicio()
-            elif opcion == "2":
-                # La opción 2 rompe el bucle y termina el programa.
-                print("\n¡Gracias por jugar! Adiós.")
-                break
-            else:
-                print("Opción no válida. Por favor, elige 1 o 2.")
+                # 2. Llamar al método del objeto 'calculadora' para obtener el resultado
+                resultado = self.calculadora.realizar_operacion(num1, num2, operacion)
+
+                # 3. Mostrar el resultado
+                print(f"👉 Resultado: {resultado}")
+
+            except ValueError:
+                print("🚨 Error: Debes introducir números válidos.")
+            except Exception as e:
+                print(f"Ha ocurrido un error inesperado: {e}")
+
+            # 4. Preguntar al usuario si desea continuar
+            continuar = input("\n¿Deseas realizar otro cálculo? (si/no): ").strip().lower()
+            if continuar != "si":
+                break  # Romper el bucle si la respuesta no es "si"
+        
+        print("\n¡Gracias por usar la calculadora! Adiós. 👋")
+
 
 # ======================================================================
 # ZONA DE CÓDIGO PRINCIPAL
+# Aquí es donde el programa comienza a ejecutarse.
 # ======================================================================
 if __name__ == "__main__":
+    # 1. Creamos un objeto (instancia) de la clase Aplicacion.
     app = Aplicacion()
+    
+    # 2. Llamamos al método 'iniciar' para que comience la ejecución.
     app.iniciar()
