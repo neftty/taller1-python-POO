@@ -16,7 +16,7 @@ class FizzBuzzJuego:
             return str(numero)
 
 # ======================================================================
-# CLASE Aplicacion (Aquí está la modificación)
+# CLASE Aplicacion (Modificada para incluir el menú)
 # ======================================================================
 class Aplicacion:
     def __init__(self):
@@ -25,44 +25,69 @@ class Aplicacion:
         """
         self.juego = FizzBuzzJuego()
 
-    def iniciar(self):
+    def _resolver_ejercicio(self):
         """
-        Método que contiene el bucle principal del programa.
+        Método privado que contiene la lógica para ejecutar una
+        ronda del juego FizzBuzz.
         """
-        print("¡Bienvenido al Juego FizzBuzz!")
-
-        limite = 0
+        print("\n--- Resolviendo FizzBuzz ---")
         # Bucle para solicitar y validar la entrada del usuario.
         while True:
             try:
                 limite_str = input("Introduce hasta qué número quieres jugar (entre 1 y 100): ")
                 limite = int(limite_str)
                 
-                # --- MODIFICACIÓN AQUÍ ---
                 # Validamos que el número esté DENTRO del rango de 1 a 100.
                 if 1 <= limite <= 100:
                     break  # Si el número es válido, rompemos el bucle.
                 else:
-                    # Si está fuera del rango, mostramos un error específico.
                     print("Error: El número debe estar entre 1 y 100.")
-                # --- FIN DE LA MODIFICACIÓN ---
 
             except ValueError:
-                print("🚨 Error: Debes introducir un número entero válido.")
+                print("Error: Debes introducir un número entero válido.")
 
-        print(f"\n--- Iniciando FizzBuzz hasta {limite} ---\n")
+        print(f"\n--- Resultado de FizzBuzz hasta {limite} ---\n")
 
         # Bucle que recorre los números desde 1 hasta el límite.
         for numero_actual in range(1, limite + 1):
             resultado = self.juego.obtener_resultado(numero_actual)
             print(resultado)
         
-        print("\n--- ¡Juego Terminado! ---")
+        print("\n--- ¡Ejercicio Terminado! ---")
+        input("Presiona Enter para volver al menú...")
 
+    def iniciar(self):
+        """
+        Método principal que muestra el menú y gestiona las opciones del usuario.
+        """
+        # Mensaje de bienvenida que explica el problema.
+        print("¡Bienvenido al Desafío FizzBuzz!")
+        print("El programa recorrerá los números desde 1 hasta el número que elijas.")
+        print("Imprimirá 'Fizz' para múltiplos de 3, 'Buzz' para múltiplos de 5,")
+        print("y 'FizzBuzz' para múltiplos de ambos.")
 
-# 
+        # Bucle principal del menú.
+        while True:
+            print("\n--- MENÚ PRINCIPAL ---")
+            print("1. Resolver Ejercicio FizzBuzz")
+            print("2. Salir")
+            
+            opcion = input("Elige una opción: ")
+
+            if opcion == "1":
+                # La opción 1 llama al método para resolver el ejercicio.
+                # Al terminar, volverá automáticamente a este menú.
+                self._resolver_ejercicio()
+            elif opcion == "2":
+                # La opción 2 rompe el bucle y termina el programa.
+                print("\n¡Gracias por jugar! Adiós.")
+                break
+            else:
+                print("Opción no válida. Por favor, elige 1 o 2.")
+
+# ======================================================================
 # ZONA DE CÓDIGO PRINCIPAL
-# 
+# ======================================================================
 if __name__ == "__main__":
     app = Aplicacion()
     app.iniciar()
