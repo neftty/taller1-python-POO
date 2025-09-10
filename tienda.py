@@ -65,10 +65,11 @@ class TerminalAcceso:
         print("\nApagando la terminal. ¡Hasta luego!")
 
 
-#--------------------CÓDIGO PRINCIPAL----------------------
+#CÓDIGO PRINCIPAL
 
-# 1. Creamos un objeto de la clase TerminalAcceso.
+# Creamos un objeto de la clase TerminalAcceso.
 terminal = TerminalAcceso()
 
-# 2. Llamamos al método 'iniciar_operacion' para comenzar.
+# Llamamos al método 'iniciar_operacion' para comenzar.
 terminal.iniciar_operacion()
+
