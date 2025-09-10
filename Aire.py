@@ -55,10 +55,11 @@ class SimuladorAmbiente:
         print("\nApagando el simulador. ¡Hasta luego!")
 
 
-#--------------------CÓDIGO PRINCIPAL----------------------
+#CÓDIGO PRINCIPAL
 
-# 1. Creamos un objeto de la clase SimuladorAmbiente.
+#Creamos un objeto de la clase SimuladorAmbiente.
 simulador = SimuladorAmbiente()
 
-# 2. Llamamos al método 'iniciar_simulacion' para comenzar.
+#  Llamamos al método 'iniciar_simulacion' para comenzar.
 simulador.iniciar_simulacion()
+
